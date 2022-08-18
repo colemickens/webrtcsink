@@ -1,0 +1,55 @@
+---
+session:
+  name: "webrtcsink-v4l2"
+  connect: true
+
+pane_frames: true
+
+template:
+  direction: Horizontal
+  parts:
+    - direction: Vertical  # part 1
+      borderless: true
+      split_size:
+        Fixed: 1
+      run:
+        plugin:
+          location: "zellij:tab-bar"
+    - direction: Vertical # part 2
+      body: true
+      pane_frames: true
+    - direction: Vertical # part 3
+      borderless: true
+      split_size:
+        Fixed: 2
+      run:
+        plugin:
+          location: "zellij:status-bar"
+
+tabs:
+  - name: "webrtcsink-serve"
+    direction: Horizontal
+    parts:
+      - direction: Vertical
+        parts:
+          - pane_name: "summary"
+            run: { command: {cmd: ./serve.sh, args: []} }
+  - name: "webrtcsink-publish"
+    direction: Horizontal
+    parts:
+      - direction: Vertical
+        parts:
+          - pane_name: "webrtcsink-publish-rpifour2"
+            run: { command: {cmd: ./v4l2.sh, args: ["2", "rpifour2" ]} }
+          - pane_name: "webrtcsink-publish-rpithreebp1"
+            run: { command: {cmd: ./v4l2.sh, args: ["0", "rpithreebp1" ]} }
+          - pane_name: "webrtcsink-publish-rpizerotwo1"
+            run: { command: {cmd: ./v4l2.sh, args: ["4", "rpizerotwo1" ]} }
+      - direction: Vertical
+        parts:
+          - pane_name: "webrtc-zssh-rpifour2"
+            run: { command: {cmd: zssh, args: ["rpifour2" ]} }
+          - pane_name: "webrtc-zssh-rpithreebp1"
+            run: { command: {cmd: zssh, args: ["rpithreebp1" ]} }
+          - pane_name: "webrtc-zssh-rpizerotwo1"
+            run: { command: {cmd: zssh, args: ["rpizerotwo1" ]} }
