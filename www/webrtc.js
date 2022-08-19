@@ -8,8 +8,10 @@
  */
 
 // Set this to override the automatic detection in websocketServerConnect()
-var ws_server;
-var ws_port = 9443;
+var ws_prefix = window.location.protocol == "https:" ? "wss" : "ws";
+var ws_url = `${ws_prefix}://${window.location.hostname}:9443`;
+// var ws_url = `${ws_prefix}://homie-cast-ws.cleo.cat`;
+
 // Override with your own STUN servers if you want
 var rtc_configuration = {iceServers: [{urls: "stun:stun.l.google.com:19302"},
                                        /* TODO: do not keep these static and in clear text in production,
@@ -215,7 +217,7 @@ function Session(our_id, peer_id, closed_callback) {
         } else {
             throw new Error ("Don't know how to connect to the signalling server with uri" + window.location);
         }
-        var ws_url = 'ws://homie-cast-ws.cleo.cat';
+        // var ws_url = 'ws://homie-cast-ws.cleo.cat';
         this.setStatus("Connecting to server " + ws_url);
         this.ws_conn = new WebSocket(ws_url);
         /* When connected, immediately register with the server */
@@ -447,7 +449,6 @@ function connect() {
     } else {
         throw new Error ("Don't know how to connect to the signalling server with uri" + window.location);
     }
-    var ws_url = 'ws://homie-cast-ws.cleo.cat';
     console.log("Connecting listener");
     ws_conn = new WebSocket(ws_url);
     ws_conn.addEventListener('open', (event) => {
