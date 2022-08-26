@@ -1,0 +1,30 @@
+{
+    "server": {
+        "host": "0.0.0.0:8000",
+        "tls": {
+            "host": "0.0.0.0:8000",
+            "enable": false,
+            "key": "key8.pem",
+            "cert": "cert.pem"
+        }
+    },
+
+    "routes": {
+        "/": "../www/"
+    },
+
+    "static": {
+        "directory": "../www",
+        "served_from": "/"
+    },
+
+    "config": {
+        "enable_hot_reload": true,
+        "fast_mem_cache": true,
+        "enable_cache_control": true,
+        "enable_directory_listing": true,
+        "minify_html": false,
+        "follow_symlinks": false,
+        "enable_logging": false
+    }
+}

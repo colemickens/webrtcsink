@@ -34,22 +34,23 @@ tabs:
         parts:
           - pane_name: "summary"
             run: { command: {cmd: ./serve.sh, args: []} }
+  - name: "binserve"
+    direction: Horizontal
+    parts:
+      - direction: Vertical
+        parts:
+          - pane_name: "binserve"
+            run: { command: {cmd: /home/cole/.local/share/cargo/bin/binserve, args: []} }
   - name: "webrtcsink-publish"
     direction: Horizontal
     parts:
       - direction: Vertical
         parts:
-          - pane_name: "webrtcsink-publish-rpifour2"
-            run: { command: {cmd: ./v4l2.sh, args: ["2", "rpifour2" ]} }
-          - pane_name: "webrtcsink-publish-rpithreebp1"
-            run: { command: {cmd: ./v4l2.sh, args: ["0", "rpithreebp1" ]} }
-          - pane_name: "webrtcsink-publish-rpizerotwo1"
-            run: { command: {cmd: ./v4l2.sh, args: ["4", "rpizerotwo1" ]} }
-      - direction: Vertical
-        parts:
-          - pane_name: "webrtc-zssh-rpifour2"
-            run: { command: {cmd: zssh, args: ["rpifour2" ]} }
-          - pane_name: "webrtc-zssh-rpithreebp1"
-            run: { command: {cmd: zssh, args: ["rpithreebp1" ]} }
-          - pane_name: "webrtc-zssh-rpizerotwo1"
-            run: { command: {cmd: zssh, args: ["rpizerotwo1" ]} }
+          # - pane_name: "webrtcsink-publish-xeep"
+          #   run: { command: {cmd: ./v4l2.sh, args: ["/dev/video0", "0" ]} }
+          # - pane_name: "webrtcsink-publish-xeep"
+          #   run: { command: {cmd: ./v4l2.sh, args: ["/dev/video1", "1" ]} }
+          # - pane_name: "webrtcsink-publish-xeep"
+          #   run: { command: {cmd: ./v4l2.sh, args: ["/dev/video2", "2" ]} }
+          - pane_name: "webrtcsink-publish-xeep"
+            run: { command: {cmd: ./v4l2.sh, args: ["/dev/video4", "4" ]} }
